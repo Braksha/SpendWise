@@ -1,129 +1,150 @@
 import 'package:flutter/material.dart';
+import 'package:spendwise/models/transaction_model.dart';
+import 'package:spendwise/models/transactions.dart';
 
-class MyForm extends StatefulWidget {
+class NewTransactionScreen extends StatefulWidget {
   @override
-  _MyFormState createState() => _MyFormState();
+  _NewTransactionScreenState createState() => _NewTransactionScreenState();
 }
 
-class _MyFormState extends State<MyForm> {
+class _NewTransactionScreenState extends State<NewTransactionScreen> {
   TextEditingController nameController = TextEditingController();
   TextEditingController paidController = TextEditingController();
-  String? selectedCategory;
+  TransactionType? transactionType;
 
-  List<String> categories = [
-    'Category 1',
-    'Category 2',
-    'Category 3',
-    // Add more categories as needed
-  ];
+  bool isFormFilled() {
+    return nameController.text.isNotEmpty &&
+        paidController.text.isNotEmpty &&
+        transactionType != null;
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        TextField(
-          controller: nameController,
-          decoration: const InputDecoration(
-            labelText: 'Transaction Name',
-            filled: true,
-            fillColor: Colors.white,
-            enabledBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: Colors.white),
-            ),
-            focusedBorder: OutlineInputBorder(
-                // borderSide: BorderSide(color: Colors.black38),
-                ),
-          ),
-        ),
-        SizedBox(
-          height: 16,
-        ),
-        Row(
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('New Transaction',
+            style: TextStyle(
+              fontSize: 30,
+              color: Colors.white,
+            )),
+        centerTitle: true,
+        backgroundColor: Colors.blue,
+      ),
+      backgroundColor: Colors.grey[200],
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Container(
-              width: 260,
-              height: 200,
-              child: TextField(
-                controller: paidController,
-                decoration: InputDecoration(
-                  labelText: 'Paid Amount',
-                  filled: true,
-                  fillColor: Colors.white,
-                  enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.white),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.black38),
-                  ),
+            Text('Total Balance'),
+            TextField(
+              controller: nameController,
+              decoration: const InputDecoration(
+                labelText: 'Transaction Name',
+                filled: true,
+                fillColor: Colors.white,
+                enabledBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.white),
                 ),
-                keyboardType: TextInputType.number,
+                focusedBorder: OutlineInputBorder(
+                    // borderSide: BorderSide(color: Colors.black38),
+                    ),
               ),
             ),
-            Spacer(),
-            SizedBox(height: 16),
-            Container(
-              width: 200,
-              height: 200,
-              child: DropdownButtonFormField<String>(
-                value: selectedCategory,
-                onChanged: (value) {
-                  setState(() {
-                    selectedCategory = value!;
-                  });
-                },
-                decoration: InputDecoration(
-                  labelText: 'Paid Type',
-                  filled: true,
-                  fillColor: Colors.white,
-                  enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.white),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.black38),
+            SizedBox(
+              height: 16,
+            ),
+            Row(
+              children: [
+                Container(
+                  width: 310,
+                  height: 200,
+                  child: TextField(
+                    controller: paidController,
+                    decoration: InputDecoration(
+                      labelText: 'Paid Amount',
+                      filled: true,
+                      fillColor: Colors.white,
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.white),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.black38),
+                      ),
+                    ),
+                    keyboardType: TextInputType.number,
                   ),
                 ),
-                items: categories.map((category) {
-                  return DropdownMenuItem(
-                    value: category,
-                    child: Row(
-                      children: [
-                        Icon(
-                          Icons.category_rounded,
-                          color: Colors.blue,
-                        ),
-                        Text('Paid Type'),
-                      ],
+                Spacer(),
+                // SizedBox(height: 16),
+                Container(
+                  width: 200,
+                  height: 200,
+                  child: DropdownButtonFormField<TransactionType>(
+                    value: transactionType,
+                    onChanged: (value) {
+                      setState(() {
+                        transactionType = value!;
+                      });
+                    },
+                    decoration: const InputDecoration(
+                      labelText: 'Paid Type',
+                      filled: true,
+                      fillColor: Colors.white,
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.white),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.black38),
+                      ),
                     ),
-                  );
-                }).toList(),
+                    items: types.map((type) {
+                      return DropdownMenuItem(
+                        value: type,
+                        child: Row(
+                          children: [
+                            type.icon,
+                            Text(type.name),
+                          ],
+                        ),
+                      );
+                    }).toList(),
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(height: 16),
+            SizedBox(
+              height: 50,
+              width: MediaQuery.of(context).size.width,
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.blue,
+                ),
+                onPressed: isFormFilled()
+                    ? () {
+                        double paid = double.parse(paidController.text);
+                        if (transactionType?.name == 'Outcome') paid *= -1;
+                        Transaction transaction = Transaction(
+                          nameController.text,
+                          paid,
+                          transactionType!,
+                        );
+                        transactions.insert(0, transaction);
+                        totalBalance += paid;
+                      }
+                    : null,
+                child: const Text(
+                  'Add A New Transaction',
+                  style: TextStyle(
+                    color: Colors.white,
+                  ),
+                ),
               ),
             ),
           ],
         ),
-        SizedBox(height: 16),
-        SizedBox(
-          height: 50,
-          width: MediaQuery.of(context).size.width,
-          child: ElevatedButton(
-            style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.blue,
-            ),
-            onPressed: () {
-              // Handle form submission here
-              print('Name: ${nameController.text}');
-              print('Paid Amount: ${paidController.text}');
-              print('Category: $selectedCategory');
-            },
-            child: Text(
-              'Submit',
-              style: TextStyle(
-                color: Colors.white,
-              ),
-            ),
-          ),
-        ),
-      ],
+      ),
     );
   }
 
