@@ -19,6 +19,7 @@ class HomeScreen extends StatelessWidget {
           //Handle button tap
         },
       ),
+      appBar: AppBar(),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         // mainAxisAlignment: MainAxisAlignment.center,
@@ -59,7 +60,7 @@ class HomeScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Container(
-                    width: 200,
+                    width: MediaQuery.of(context).size.width * 0.43,
                     height: 150,
                     decoration: BoxDecoration(
                       border: Border.all(
@@ -92,7 +93,7 @@ class HomeScreen extends StatelessWidget {
                         ]),
                   ),
                   Container(
-                    width: 200,
+                    width: MediaQuery.of(context).size.width * 0.43,
                     height: 150,
                     decoration: BoxDecoration(
                       border: Border.all(width: 0.5, color: Colors.grey),
