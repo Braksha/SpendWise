@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:spendwise/screens/add_trasaction_screen.dart';
 import 'package:spendwise/screens/another_screen.dart';
 import 'package:spendwise/screens/home_screen.dart';
+import 'package:spendwise/screens/report_screen.dart';
 
 class NavBar extends StatefulWidget {
   const NavBar({super.key});
@@ -16,7 +17,7 @@ class _NavBarState extends State<NavBar> {
   List Screens = [
     NewTransactionScreen(),
     HomeScreen(),
-    AnotherScreen(),
+    ReportScreen(),
   ];
   int _page = 1;
   GlobalKey<CurvedNavigationBarState> _bottomNavigationKey = GlobalKey();
