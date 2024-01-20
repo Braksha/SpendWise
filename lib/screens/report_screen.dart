@@ -34,30 +34,60 @@ import 'package:spendwise/widgets/bar_graph.dart';
    Widget build(BuildContext context) {
      return Scaffold(
        appBar: AppBar(),
-       body: Column(
-         children:[
-           Row(
-             children: [
-               Text("Report",
-                 style: TextStyle(
-                     fontWeight: FontWeight.bold,
-                     fontSize: 20
+       body: Padding(
+         padding: const EdgeInsets.all(10.0),
+         child: Column(
+           children:[
+             Row(
+               children: [
+                 Text("Report",
+                   style: TextStyle(
+                       fontWeight: FontWeight.bold,
+                       fontSize: 20
+                   ),
                  ),
-               ),
-               Spacer(),
-               Icon(
-                   Icons.calendar_month
-               ),
+                 Spacer(),
+                 Icon(
+                     Icons.calendar_month
+                 ),
 
-             ],
-           ),
+               ],
+             ),
+            SizedBox(
+              height: 100,
+            ),
+            Container(
+
+              height: MediaQuery.of(context).size.height/2,
+              width: MediaQuery.of(context).size.width * 0.99,
+
+              decoration: BoxDecoration(
+                color: Colors.grey[200],
+                borderRadius: BorderRadius.circular(20)
+              ),
+
+              child: Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: SizedBox(
+
+                    child: MyGraph(
+                       weeklySummaryExpense: weeklySummaryExpense,
+                      weeklySummaryIncom: weeklySummaryIncome,
+                    ),),
+              ),
+            ),
           SizedBox(
-              height: 200,
-              child: MyGraph(
-                 weeklySummaryExpense: weeklySummaryExpense,
-                weeklySummaryIncom: weeklySummaryIncome,
-              ),),
-         ],
+            height: 80,
+          ),
+          Text("This week",
+          style: TextStyle(
+            fontSize: 30,
+            fontWeight: FontWeight.bold,
+          ),
+          ),
+           ],
+         ),
+
        ) ,
      );
    }

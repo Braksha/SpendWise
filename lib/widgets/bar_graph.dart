@@ -15,6 +15,7 @@ class MyGraph extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+     double max = 1000;
     BarData myBarData = BarData(
       SunAmount: weeklySummaryExpense[0],
       ManAmount: weeklySummaryExpense[1],
@@ -39,11 +40,12 @@ class MyGraph extends StatelessWidget {
 
     return BarChart(
       BarChartData(
-        maxY: 100,
+         maxY : max,
         minY: 0,
         gridData: FlGridData(show: false),
         borderData: FlBorderData(show: false),
         titlesData: FlTitlesData(
+          topTitles: AxisTitles(sideTitles: SideTitles(showTitles: false)),
           rightTitles: AxisTitles(sideTitles: SideTitles(showTitles: false)),
           bottomTitles: AxisTitles(
             sideTitles: SideTitles(
@@ -51,42 +53,32 @@ class MyGraph extends StatelessWidget {
               getTitlesWidget: getBottomTitles,
             ),
           ),
+
         ),
-        barGroups: [
-          ...myBarData.barData.map(
-                (data) => BarChartGroupData(
-              x: data.x,
-              barRods: [
-                BarChartRodData(
-                  toY: data.y,
-                  color: Colors.green,
-                  width: 10,
-                  borderRadius: BorderRadius.circular(2),
-                ),
-              ],
-            ),
-          ),
-          ...MyIncom.barData.map(
-                (data) => BarChartGroupData(
-              x: data.x,
-              barRods: [
-                BarChartRodData(
-                  toY: data.y,
-                  color: Colors.pink,
-                  width: 10,
-                  borderRadius: BorderRadius.circular(2),
-                ),
-              ],
-            ),
-          ),
-        ],
+        barGroups: myBarData.barData.map((data) {
+          double expense = weeklySummaryExpense[data.x]; // Assuming weeklySummaryExpense is a list
+          double income = weeklySummaryIncom[data.x];
+          return BarChartGroupData(
+            x: data.x,
+            barRods: [
+              BarChartRodData(
+                toY:  expense > max ? max : expense,
+                color: Colors.red,
+              ),
+              BarChartRodData(
+                toY: income > max ? max : income, // Replace with your income value
+                color: Colors.teal,
+              ),
+            ],
+          );
+        }).toList(),
       ),
     );
   }
 
   Widget getBottomTitles(double value, TitleMeta meta) {
     const style = TextStyle(
-      color: Colors.grey,
+      color: Colors.blueGrey,
       fontWeight: FontWeight.bold,
       fontSize: 14,
     );

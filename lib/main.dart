@@ -6,7 +6,7 @@ import 'package:spendwise/screens/report_screen.dart';
 void main() {
   runApp(
     MaterialApp(
-      home: ReportScreen(),
+      home: HomeScreen(),
     ),
   );
 }
