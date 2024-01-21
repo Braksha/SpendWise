@@ -35,8 +35,17 @@ class _NewTransactionScreenState extends State<NewTransactionScreen> {
         padding: const EdgeInsets.all(8.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Text('Total Balance'),
+            Text(
+              'Total Balance',
+              style: TextStyle(fontSize: 15),
+            ),
+            Text(
+              '$totalBalance LD',
+              style: TextStyle(fontSize: 75, color: Colors.blue),
+            ),
+            SizedBox(height: 64),
             TextField(
               controller: nameController,
               decoration: const InputDecoration(
@@ -124,14 +133,16 @@ class _NewTransactionScreenState extends State<NewTransactionScreen> {
                 onPressed: isFormFilled()
                     ? () {
                         double paid = double.parse(paidController.text);
+
                         if (transactionType?.name == 'Outcome') paid *= -1;
+
+                        totalBalance += paid;
                         Transaction transaction = Transaction(
                           nameController.text,
                           paid,
                           transactionType!,
                         );
                         transactions.insert(0, transaction);
-                        totalBalance += paid;
                       }
                     : null,
                 child: const Text(

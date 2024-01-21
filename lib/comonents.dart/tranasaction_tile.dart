@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:spendwise/application/transaction_cubit.dart';
 import 'package:spendwise/models/transaction_model.dart';
 
 class TransactionTile extends StatelessWidget {
@@ -7,12 +9,14 @@ class TransactionTile extends StatelessWidget {
   final double paid;
   final TransactionType type;
   final DateTime created;
+  final int index;
   const TransactionTile({
     super.key,
     required this.name,
     required this.paid,
     required this.type,
     required this.created,
+    required this.index,
   });
 
   @override
@@ -60,6 +64,16 @@ class TransactionTile extends StatelessWidget {
             color: type.name == 'Income' ? Colors.green : Colors.red,
           ),
         ),
+        InkWell(
+          onTap: () {
+            context.watch<TransactionBloc>().removeTransaction(index);
+          },
+          child: const Icon(
+            Icons.delete,
+            color: Colors.red,
+            size: 24,
+          ),
+        )
       ],
     );
   }

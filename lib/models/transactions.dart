@@ -42,7 +42,37 @@ double thisMonthOutcomes() {
       outcomes += transaction.paid;
     }
   }
-  // totalBalance -= outcomes;
-  print('****************************$outcomes');
   return outcomes;
+}
+
+// List<double> thisWeekIcomes() {
+//   List<double> Incomes = [0, 0, 0, 0, 0, 0, 0];
+//   int weekday = DateTime.now().weekday;
+//   int today = DateTime.now().weekday;
+
+//   for (Transaction transaction in transactions) {
+//     if (transaction.type.name == 'Income' &&
+//         transaction.created.weekday <= weekday &&
+//         today - transaction.created.day < 7) {
+//       Incomes[weekday - 1] += transaction.paid;
+//     }
+//   }
+//   print(Incomes);
+//   return Incomes;
+// }
+
+List<double> thisWeekAmounts(String amountsType) {
+  List<double> amounts = [0, 0, 0, 0, 0, 0, 0];
+  int weekday = DateTime.now().weekday;
+  int today = DateTime.now().weekday;
+
+  for (Transaction transaction in transactions) {
+    if (transaction.type.name == amountsType &&
+        transaction.created.weekday <= weekday &&
+        today - transaction.created.day < 7) {
+      amounts[weekday - 1] += transaction.paid.abs();
+    }
+  }
+  // print(Outcomes);
+  return amounts;
 }

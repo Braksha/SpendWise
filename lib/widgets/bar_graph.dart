@@ -1,8 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
-  import 'package:spendwise/widgets/bar_data.dart';
-
+import 'package:spendwise/widgets/bar_data.dart';
 
 class MyGraph extends StatelessWidget {
   final List weeklySummaryExpense;
@@ -15,7 +14,7 @@ class MyGraph extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-     double max = 1000;
+    double max = 1000;
     BarData myBarData = BarData(
       SunAmount: weeklySummaryExpense[0],
       ManAmount: weeklySummaryExpense[1],
@@ -40,7 +39,7 @@ class MyGraph extends StatelessWidget {
 
     return BarChart(
       BarChartData(
-         maxY : max,
+        maxY: max,
         minY: 0,
         gridData: FlGridData(show: false),
         borderData: FlBorderData(show: false),
@@ -53,20 +52,22 @@ class MyGraph extends StatelessWidget {
               getTitlesWidget: getBottomTitles,
             ),
           ),
-
         ),
         barGroups: myBarData.barData.map((data) {
-          double expense = weeklySummaryExpense[data.x]; // Assuming weeklySummaryExpense is a list
+          double expense = weeklySummaryExpense[
+              data.x]; // Assuming weeklySummaryExpense is a list
           double income = weeklySummaryIncom[data.x];
           return BarChartGroupData(
             x: data.x,
             barRods: [
               BarChartRodData(
-                toY:  expense > max ? max : expense,
+                toY: expense > max ? max : expense,
                 color: Colors.red,
               ),
               BarChartRodData(
-                toY: income > max ? max : income, // Replace with your income value
+                toY: income > max
+                    ? max
+                    : income, // Replace with your income value
                 color: Colors.teal,
               ),
             ],
@@ -85,22 +86,22 @@ class MyGraph extends StatelessWidget {
     Widget text;
     switch (value.toInt()) {
       case 0:
-        text = const Text('S', style: style);
-        break;
-      case 1:
         text = const Text('M', style: style);
         break;
-      case 2:
+      case 1:
         text = const Text('T', style: style);
         break;
-      case 3:
+      case 2:
         text = const Text('W', style: style);
         break;
-      case 4:
+      case 3:
         text = const Text('T', style: style);
         break;
-      case 5:
+      case 4:
         text = const Text('F', style: style);
+        break;
+      case 5:
+        text = const Text('S', style: style);
         break;
       case 6:
         text = const Text('S', style: style);
