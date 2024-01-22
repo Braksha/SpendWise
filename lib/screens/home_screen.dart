@@ -15,6 +15,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+resizeToAvoidBottomInset: false ,
       backgroundColor: Colors.grey[200],
       body: BlocBuilder<TransactionBloc, TransactionState>(
         builder: (context, state) {

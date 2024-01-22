@@ -21,6 +21,7 @@ class _NewTransactionScreenState extends State<NewTransactionScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         title: Text('New Transaction',
             style: TextStyle(
@@ -66,7 +67,7 @@ class _NewTransactionScreenState extends State<NewTransactionScreen> {
             Row(
               children: [
                 Container(
-                  width: 310,
+                  width: 190,
                   height: 200,
                   child: TextField(
                     controller: paidController,
