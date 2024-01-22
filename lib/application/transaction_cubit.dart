@@ -7,10 +7,12 @@ class TransactionBloc extends Cubit<TransactionState> {
   TransactionBloc(super.initialState);
 
   void removeTransaction(int index) {
-    final List<Transaction> updateTransaction = [...state.transactions];
+    // print(state.transactions[0].paid);
+    final List<Transaction> updateTransactions = [...state.transactions];
 
-    updateTransaction.removeAt(index);
-    emit(state.copyWith(transactions: updateTransaction));
+    updateTransactions.removeAt(index);
+    // print(updateTransactions);
+    emit(state.copyWith(transactions: updateTransactions));
   }
 }
 

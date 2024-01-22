@@ -66,7 +66,7 @@ class TransactionTile extends StatelessWidget {
         ),
         InkWell(
           onTap: () {
-            context.watch<TransactionBloc>().removeTransaction(index);
+            context.read<TransactionBloc>().removeTransaction(index);
           },
           child: const Icon(
             Icons.delete,

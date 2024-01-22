@@ -7,9 +7,13 @@ class TransactionState {
 
   final List<Transaction> transactions;
 
+  @override
+  String toString() {
+    return 'TransactionState(transactions: $transactions)';
+  }
+
   TransactionState copyWith({
-    List<Transaction>? cartItems,
-    required List<Transaction> transactions,
+    List<Transaction>? transactions,
   }) {
     return TransactionState(
       transactions: transactions ?? this.transactions,
