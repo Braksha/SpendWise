@@ -10,7 +10,7 @@ class TransactionTile extends StatelessWidget {
   final TransactionType type;
   final DateTime created;
   final int index;
-  const TransactionTile({
+  TransactionTile({
     super.key,
     required this.name,
     required this.paid,
