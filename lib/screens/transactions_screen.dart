@@ -34,12 +34,12 @@ class TransactionsScreen extends StatelessWidget {
               separatorBuilder: (BuildContext context, int index) {
                 return SizedBox(height: 8);
               },
-              itemCount: transactions.length,
+              itemCount: state.transactions.length,
               itemBuilder: (context, index) => TransactionTile(
-                  name: transactions[index].name,
-                  paid: transactions[index].paid,
-                  type: transactions[index].type,
-                  created: transactions[index].created,
+                  name: state.transactions[index].name,
+                  paid: state.transactions[index].paid,
+                  type: state.transactions[index].type,
+                  created: state.transactions[index].created,
                   index: index),
             ),
           );

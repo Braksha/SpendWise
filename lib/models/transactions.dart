@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:spendwise/models/transaction_model.dart';
 
-double totalBalance = transactions
-    .map((transaction) => transaction.paid)
-    .reduce((value, element) => value + element);
 
 // List<Transaction> transactions = [
 //   Transaction('Fuel', 20.0, types[1]),
@@ -22,28 +19,28 @@ List<TransactionType> types = [
   ),
 ];
 
-double thisMonthIncomes() {
-  double incomes = 0;
-  for (Transaction transaction in transactions) {
-    if (transaction.created.month == DateTime.now().month &&
-        transaction.type.name == 'Income') {
-      incomes += transaction.paid;
-    }
-  }
-  return incomes;
-}
+// double thisMonthIncomes() {
+//   double incomes = 0;
+//   for (Transaction transaction in transactions) {
+//     if (transaction.created.month == DateTime.now().month &&
+//         transaction.type.name == 'Income') {
+//       incomes += transaction.paid;
+//     }
+//   }
+//   return incomes;
+// }
 
-double thisMonthOutcomes() {
-  double outcomes = 0;
-
-  for (Transaction transaction in transactions) {
-    if (transaction.created.month == DateTime.now().month &&
-        transaction.type.name == 'Outcome') {
-      outcomes += transaction.paid;
-    }
-  }
-  return outcomes;
-}
+// double thisMonthOutcomes() {
+//   double outcomes = 0;
+//
+//   for (Transaction transaction in transactions) {
+//     if (transaction.created.month == DateTime.now().month &&
+//         transaction.type.name == 'Outcome') {
+//       outcomes += transaction.paid;
+//     }
+//   }
+//   return outcomes;
+// }
 
 // List<double> thisWeekIcomes() {
 //   List<double> Incomes = [0, 0, 0, 0, 0, 0, 0];
@@ -61,18 +58,18 @@ double thisMonthOutcomes() {
 //   return Incomes;
 // }
 
-List<double> thisWeekAmounts(String amountsType) {
-  List<double> amounts = [0, 0, 0, 0, 0, 0, 0];
-  int weekday = DateTime.now().weekday;
-  int today = DateTime.now().weekday;
-
-  for (Transaction transaction in transactions) {
-    if (transaction.type.name == amountsType &&
-        transaction.created.weekday <= weekday &&
-        today - transaction.created.day < 7) {
-      amounts[weekday - 1] += transaction.paid.abs();
-    }
-  }
-  // print(Outcomes);
-  return amounts;
-}
+// List<double> thisWeekAmounts(String amountsType) {
+//   List<double> amounts = [0, 0, 0, 0, 0, 0, 0];
+//   int weekday = DateTime.now().weekday;
+//   int today = DateTime.now().weekday;
+//
+//   for (Transaction transaction in transactions) {
+//     if (transaction.type.name == amountsType &&
+//         transaction.created.weekday <= weekday &&
+//         today - transaction.created.day < 7) {
+//       amounts[weekday - 1] += transaction.paid.abs();
+//     }
+//   }
+//   // print(Outcomes);
+//   return amounts;
+// }

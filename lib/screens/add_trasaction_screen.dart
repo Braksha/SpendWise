@@ -45,7 +45,7 @@ class _NewTransactionScreenState extends State<NewTransactionScreen> {
               style: TextStyle(fontSize: 15),
             ),
             Text(
-              '$totalBalance LD',
+              '${context.watch<TransactionBloc>().totalBalance} LD',
               style: TextStyle(fontSize: 75, color: Colors.blue),
             ),
             SizedBox(height: 64),
@@ -135,19 +135,10 @@ class _NewTransactionScreenState extends State<NewTransactionScreen> {
                 ),
                 onPressed: isFormFilled()
                     ? () {
-                        double paid = double.parse(paidController.text);
 
-                        if (transactionType?.name == 'Outcome') paid *= -1;
-
-                        totalBalance += paid;
-                        Transaction transaction = Transaction(
-                          nameController.text,
-                          paid,
-                          transactionType!,
-                        );
                         context
                             .read<TransactionBloc>()
-                            .addTransaction(transaction);
+                            .addTransaction(double.parse(paidController.text),transactionType!,transactionType!.name);
                       }
                     : null,
                 child: const Text(

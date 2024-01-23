@@ -1,7 +1,10 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:spendwise/models/transactions.dart';
 import 'package:spendwise/widgets/bar_graph.dart';
+
+import '../application/transaction_cubit.dart';
 
 class ReportScreen extends StatefulWidget {
   ReportScreen({super.key});
@@ -59,8 +62,8 @@ class _ReportScreenState extends State<ReportScreen> {
                 padding: const EdgeInsets.all(10.0),
                 child: SizedBox(
                   child: MyGraph(
-                    weeklySummaryExpense: thisWeekAmounts('Income'),
-                    weeklySummaryIncom: thisWeekAmounts('Outcome'),
+                    weeklySummaryExpense: context.watch<TransactionBloc>().thisWeekAmounts('Income'),
+                    weeklySummaryIncom: context.watch<TransactionBloc>().thisWeekAmounts('Outcome'),
                   ),
                 ),
               ),

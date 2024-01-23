@@ -39,7 +39,7 @@ resizeToAvoidBottomInset: false ,
                   ),
                 ),
                 Text(
-                  '$totalBalance LD',
+                  '${context.watch<TransactionBloc>().totalBalance} LD',
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 45,
@@ -82,7 +82,7 @@ resizeToAvoidBottomInset: false ,
                           ),
                         ),
                         Text(
-                          "${thisMonthIncomes()} LD",
+                          "${context.watch<TransactionBloc>().thisMonthIncomes()}LD",
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 20,
@@ -116,7 +116,7 @@ resizeToAvoidBottomInset: false ,
                           ),
                         ),
                         Text(
-                          "${thisMonthOutcomes()} LD",
+                          "${context.watch<TransactionBloc>().thisMonthOutcomes()} LD",
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 20,
