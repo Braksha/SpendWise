@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:spendwise/application/transaction_cubit.dart';
 import 'package:spendwise/models/transaction_model.dart';
 import 'package:spendwise/models/transactions.dart';
 
@@ -143,7 +145,9 @@ class _NewTransactionScreenState extends State<NewTransactionScreen> {
                           paid,
                           transactionType!,
                         );
-                        transactions.insert(0, transaction);
+                        context
+                            .read<TransactionBloc>()
+                            .addTransaction(transaction);
                       }
                     : null,
                 child: const Text(
@@ -167,3 +171,4 @@ class _NewTransactionScreenState extends State<NewTransactionScreen> {
     super.dispose();
   }
 }
+

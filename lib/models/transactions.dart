@@ -5,11 +5,11 @@ double totalBalance = transactions
     .map((transaction) => transaction.paid)
     .reduce((value, element) => value + element);
 
-List<Transaction> transactions = [
-  Transaction('Fuel', 20.0, types[1]),
-  Transaction('Fuel', 20.0, types[1]),
-  Transaction('Fuel', -20.0, types[0]),
-];
+// List<Transaction> transactions = [
+//   Transaction('Fuel', 20.0, types[1]),
+//   Transaction('Fuel', 20.0, types[1]),
+//   Transaction('Fuel', -20.0, types[0]),
+// ];
 
 List<TransactionType> types = [
   TransactionType(

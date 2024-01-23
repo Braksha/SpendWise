@@ -5,13 +5,18 @@ import 'package:spendwise/models/transaction_model.dart';
 
 class TransactionBloc extends Cubit<TransactionState> {
   TransactionBloc(super.initialState);
+  void addTransaction(Transaction transaction) {
+    final List<Transaction> updateTransactions = [
+      ...state.transactions,
+      transaction
+    ];
+    emit(state.copyWith(transactions: updateTransactions));
+  }
 
   void removeTransaction(int index) {
-    // print(state.transactions[0].paid);
     final List<Transaction> updateTransactions = [...state.transactions];
 
     updateTransactions.removeAt(index);
-    // print(updateTransactions);
     emit(state.copyWith(transactions: updateTransactions));
   }
 }

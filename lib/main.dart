@@ -15,7 +15,7 @@ void main() {
         BlocProvider(
           create: (context) => TransactionBloc(
             TransactionState(
-              transactions: transactions,
+              transactions: [],
             ),
           ),
         ),
