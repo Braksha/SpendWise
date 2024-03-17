@@ -2,7 +2,7 @@
 
 SpendWise is an upcoming budget management application designed to revolutionize the way users track their expenses and manage their finances. While still under development, SpendWise aims to offer a range of features to empower users to take control of their financial lives.
 
-## Key Features (Upcoming)
+## Key Features
 
 - **Expense Tracking**: Seamlessly input income and expenses to keep track of your financial transactions.
 - **Categorized Transactions**: Categorize transactions to better understand your spending patterns.
